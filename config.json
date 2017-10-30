@@ -1,0 +1,6 @@
+{
+    "mqtt_url" : "mqtt://localhost",
+    "mqtt_username" : "User name",
+    "mqtt_password" : "Password",
+    "thingy_white_list" : ["cc09865d8619", "e72214756798"]
+}
