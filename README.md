@@ -61,14 +61,14 @@ Alias=thingy-hass-mqtt.service
 ### Configuration
 1. Setup MQTT and select MQTT Broker according to [this page](https://home-assistant.io/components/mqtt/).
 2. Availible data are:
-```json
+```
 {
-  temp: "25",    // Temperature in Celsius
-  press: "1000", // Air Pressure in hPa
-  humid: "30",   // Relative Humidity in %
-  eco2: "500",   // Estimated CO2 in ppm
-  tvoc: "20",    // Total Volatile Organic Compound in ppb
-  batt: "85",    // Battery level in %
+  "temp": "25",    // Temperature in Celsius
+  "press": "1000", // Air Pressure in hPa
+  "humid": "30",   // Relative Humidity in %
+  "eco2": "500",   // Estimated CO2 in ppm
+  "tvoc": "20",    // Total Volatile Organic Compound in ppb
+  "batt": "85"     // Battery level in %
 }
 ```
 3. Add sensors like in the following example.
