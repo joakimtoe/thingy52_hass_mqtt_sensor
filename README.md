@@ -25,14 +25,15 @@ pi@raspberrypi:~ $ sudo hcitool lescan
 LE Scan ...
 E2:16:3A:FD:67:46 Thingy
 ```
-2. Remove ':' and add `e2163afd6746` to the `config.json` parameter `thingy_white_list`. Or remove `thingy_white_list` completly to connect to all discovered Thingy:52's.
+2. Open `config.json` with `nano config.json`
+2. Remove ':' from the device address and add it (with this format `e2163afd6746`) to the parameter `thingy_white_list` in the `config.json` file. Or remove `thingy_white_list` completly to connect to all discovered Thingy:52's.
 3. Change `mqtt_url`, `mqtt_username` and `mqtt_password` according to your MQTT Broker. See Home-Assitant configuration chapter if in doubt. If you are using Home-Assitant's embedded MQTT broker see [this page](https://home-assistant.io/docs/mqtt/broker/#embedded-broker).
 
 ### Run
-To run the script: `sudo node thingy_hass_mqtt.js`.
+To run the script: `sudo node thingy_hass_mqtt.js`
 
 ### Autorun
-1. Create a new systemd service `sudo nano /etc/systemd/system/thingy-hass-mqtt.service`.
+1. Create a new systemd service `sudo nano /etc/systemd/system/thingy-hass-mqtt.service`
 2. Then copy/paste the following into the service file: 
 ```
 [Unit]
@@ -52,7 +53,7 @@ WantedBy=multi-user.target
 Alias=thingy-hass-mqtt.service
 ```
 3. Change the path to your thingy52_hass_mqtt_sensor folder and save.
-4. Reload systemd: `sudo systemctl --system daemon-reload`.
+4. Reload systemd: `sudo systemctl --system daemon-reload`
 5. To start automatically at boot, enable the service: `sudo systemctl enable thingy-hass-mqtt`. Use `disable` to turn off.
 6. To start it now use: `sudo systemctl start thingy-hass-mqtt`. Also supports `stop`, `restart` and `status`.
 7. To get the log use: `sudo journalctl -f -u thingy-hass-mqtt`
@@ -76,10 +77,11 @@ Alias=thingy-hass-mqtt.service
 # Example configuration.yaml entry
 sensor:
   - platform: mqtt
-    state_topic: "thingy/[bluetooth device address without :]/environment"
+    state_topic: "thingy/[lower case bluetooth device address without :]/environment"
     name: "Temperature"
     unit_of_measurement: "C"
     value_template: '{{ value_json.temp }}'
 ```
-To find your Thingy:52's bluetooth device address. `hcitool lescan`
+To find your Thingy:52's bluetooth device address use. `sudo hcitool lescan`
+
 4. Restart Home-Assitant and the added sensors will appear in the States view.
